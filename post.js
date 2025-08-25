@@ -43,7 +43,7 @@ async function loadPost() {
   if (!slug) { titleEl.textContent = '未指定文章'; contentEl.innerHTML = '<p style="color:#fca5a5">URL 缺少 ?post= 参数</p>'; return; }
 
   try {
-    const res = await fetch(`${window.location.pathname.includes('github.io') ? '' : './'}posts/${slug}.md`, { cache: 'no-cache' }); if (!res.ok) throw new Error('文章不存在或无法加载');
+    const res = await fetch(`${window.location.pathname.includes('github.io/notes') ? '' : './'}posts/${slug}.md`, { cache: 'no-cache' }); if (!res.ok) throw new Error('文章不存在或无法加载');
     const md = await res.text();
     const { meta, content } = parseFrontMatter(md);
 
