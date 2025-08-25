@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>记录 · 时间轴</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="feed.xml" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-row">
+            <div>
+                <h1>记录</h1>
+                <p class="subtitle">以时间轴的方式记录点滴</p>
+            </div>
+            <nav class="nav">
+                <a href="./">首页</a>
+                <a href="about.html">关于</a>
+                <a href="feed.xml">RSS</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌙</button>
+                <div class="palettes" id="palette-select" title="主题色">
+                    <button class="palette-chip" data-palette="default" aria-label="默认"></button>
+                    <button class="palette-chip emerald" data-palette="emerald" aria-label="青绿"></button>
+                    <button class="palette-chip rose" data-palette="rose" aria-label="玫红"></button>
+                    <button class="palette-chip amber" data-palette="amber" aria-label="琥珀"></button>
+                    <button class="palette-chip violet" data-palette="violet" aria-label="紫罗兰"></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="controls">
+            <div class="controls">
+                <div class="search-wrap">
+                    <input id="search" type="search" placeholder="搜索标题、摘要、标签或全文..." />
+                    <div id="search-status" class="search-status">索引：未构建</div>
+                </div>
+                <div id="tag-filters" class="tag-filters" aria-label="标签筛选"></div>
+                <div class="palettes" id="palette-select" title="主题色">
+                    <button class="palette-chip" data-palette="default" aria-label="默认"></button>
+                    <button class="palette-chip emerald" data-palette="emerald" aria-label="青绿"></button>
+                    <button class="palette-chip rose" data-palette="rose" aria-label="玫红"></button>
+                    <button class="palette-chip amber" data-palette="amber" aria-label="琥珀"></button>
+                    <button class="palette-chip violet" data-palette="violet" aria-label="紫罗兰"></button>
+                </div>
+                <button id="rebuild-index" class="btn small" title="扫描 posts/*.md 并更新 index.json">更新索引</button>
+            </div>
+        </section>
+
+        <section id="timeline" class="timeline" aria-live="polite">
+            <!-- 动态注入文章时间轴 -->
+        </section>
+
+        <nav id="pagination" class="pagination" aria-label="分页"></nav>
+    </main>
+
+    <footer class="site-footer">
+        <p>© <span id="year"></span> 我的生活记录</p>
+    </footer>
+
+    <script src="main.js" defer></script>
+</body>
+
+</html>

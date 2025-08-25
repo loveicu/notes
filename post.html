@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>文章 · 我的生活记录</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <!-- 将纯文本链接改为带图标的玻璃拟态按钮 -->
+      <a href="./" class="back-link btn small" aria-label="返回首页" title="返回首页">
+        <span class="icon" aria-hidden="true">←</span>
+        <span class="label">返回首页</span>
+      </a>
+      <nav class="nav">
+        <a href="./">首页</a>
+        <a href="about.html">关于</a>
+        <a href="feed.xml">RSS</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌙</button>
+        <div class="palettes" id="palette-select" title="主题色">
+          <button class="palette-chip" data-palette="default" aria-label="默认"></button>
+          <button class="palette-chip emerald" data-palette="emerald" aria-label="青绿"></button>
+          <button class="palette-chip rose" data-palette="rose" aria-label="玫红"></button>
+          <button class="palette-chip amber" data-palette="amber" aria-label="琥珀"></button>
+          <button class="palette-chip violet" data-palette="violet" aria-label="紫罗兰"></button>
+        </div>
+      </nav>
+    </div>
+    <h1 id="post-title">加载中...</h1>
+  </header>
+
+  <main class="container">
+    <article id="post-content" class="post-content">
+      <!-- Markdown 内容渲染到这里 -->
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> 我的生活记录</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+  <script src="post.js" defer></script>
+</body>
+</html>
