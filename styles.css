@@ -23,6 +23,51 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 
+/* 移动端基础优化 */
+body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* 防止移动端长按选择 */
+.timeline-item,
+.nav a,
+.theme-toggle,
+.tag-chip,
+.btn,
+.palette-chip {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 允许文本内容选择 */
+.post-title,
+.excerpt,
+.timeline-date,
+#search {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* 移动端输入框优化 */
+#search {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 12px;
+}
+
+#search::-webkit-search-decoration,
+#search::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
 /* 页面加载动画 */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
@@ -301,12 +346,196 @@ html {
   background: linear-gradient(135deg, var(--accent), var(--primary));
 }
 
-/* 响应式 */
-@media (max-width:640px){
-  .container{padding:16px}
-  .site-header{padding:16px 16px 0}
-  .timeline{padding-left:20px}
-  .timeline::before{left:7px}
+/* 响应式设计 */
+
+/* 平板端适配 */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .site-header {
+    padding: 20px;
+  }
+  
+  .header-row {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .nav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+  
+  .site-header {
+    padding: 12px;
+  }
+  
+  .header-row {
+    padding: 16px;
+    border-radius: 16px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .site-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+  }
+  
+  .nav {
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .nav a {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  
+  .theme-toggle {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  
+  .palettes {
+    gap: 6px;
+    margin-left: 8px;
+  }
+  
+  .palette-chip {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* 小屏手机适配 */
+@media (max-width: 640px) {
+  .container {
+    padding: 8px;
+  }
+  
+  .site-header {
+    padding: 8px;
+  }
+  
+  .header-row {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  
+  .site-header h1 {
+    font-size: 20px;
+  }
+  
+  .subtitle {
+    font-size: 13px;
+  }
+  
+  /* 时间轴移动端优化 */
+  .timeline {
+    padding-left: 16px;
+    margin-top: 20px;
+  }
+  
+  .timeline::before {
+    left: 6px;
+    width: 2px;
+  }
+  
+  .timeline-item {
+    margin: 12px 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  
+  .timeline-item::before {
+    left: -14px;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .timeline-year {
+    font-size: 16px;
+    margin: 24px 0 8px 0;
+  }
+  
+  .timeline-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .timeline-date {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .post-title {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  .excerpt {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+  
+  /* 控件区移动端优化 */
+  section.controls {
+    padding: 12px;
+    border-radius: 16px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .search-wrap {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  #search {
+    min-width: 100%;
+    padding: 10px 12px;
+    font-size: 16px; /* 防止iOS缩放 */
+    border-radius: 10px;
+  }
+  
+  .search-status {
+    font-size: 11px;
+    text-align: center;
+  }
+  
+  .tag-filters {
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .tag-chip {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
   
   /* 移动端动画优化 */
   .timeline-item:nth-child(odd),
@@ -314,17 +543,172 @@ html {
     animation: fadeInUp 0.6s ease-out;
   }
   
-  .header-row {
-    padding: 16px 18px;
+  /* 移动端悬停效果调整 */
+  .timeline-item:hover {
+    transform: translateY(-1px);
   }
   
+  .post-title:hover {
+    transform: none;
+  }
+  
+  .tag-chip:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+  
+  /* 导航栏移动端优化 */
   .nav {
-    gap: 12px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav a {
+    padding: 5px 8px;
+    font-size: 13px;
+  }
+  
+  .theme-toggle {
+    padding: 5px 8px;
+    font-size: 13px;
+  }
+  
+  .palettes {
+    gap: 4px;
+    margin-left: 6px;
   }
   
   .palette-chip {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* 超小屏设备适配 */
+@media (max-width: 480px) {
+  .container {
+    padding: 6px;
+  }
+  
+  .site-header {
+    padding: 6px;
+  }
+  
+  .header-row {
+    padding: 10px;
+    gap: 12px;
+  }
+  
+  .site-header h1 {
+    font-size: 18px;
+  }
+  
+  .subtitle {
+    font-size: 12px;
+  }
+  
+  .nav {
+    gap: 4px;
+  }
+  
+  .nav a {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+  
+  .theme-toggle {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+  
+  .timeline {
+    padding-left: 14px;
+  }
+  
+  .timeline::before {
+    left: 5px;
+  }
+  
+  .timeline-item {
+    padding: 10px 12px;
+  }
+  
+  .timeline-item::before {
+    left: -12px;
+    width: 6px;
+    height: 6px;
+  }
+  
+  .post-title {
+    font-size: 15px;
+  }
+  
+  .excerpt {
+    font-size: 12px;
+  }
+  
+  section.controls {
+    padding: 10px;
+  }
+  
+  #search {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  /* 移除悬停效果，改为点击效果 */
+  .timeline-item:hover,
+  .post-title:hover,
+  .tag-chip:hover,
+  .btn:hover,
+  .nav a:hover,
+  .theme-toggle:hover,
+  .palette-chip:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+  
+  /* 增加点击区域 */
+  .nav a,
+  .theme-toggle,
+  .tag-chip,
+  .btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .palette-chip {
+    min-width: 44px;
+    min-height: 44px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* 横屏模式优化 */
+@media (max-width: 768px) and (orientation: landscape) {
+  .header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .site-header h1 {
+    font-size: 20px;
+  }
+  
+  .nav {
+    flex-direction: row;
+    gap: 8px;
   }
 }
 

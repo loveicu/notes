@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>我的生活记录</title>
+    <title>记录</title>
     <link>http://localhost:8000/</link>
-    <description>时间轴生活记录</description>
+    <description>时间轴记录</description>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate>
     <item>
