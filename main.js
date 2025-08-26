@@ -52,7 +52,7 @@ function stripMd(s) {
 }
 async function ensureContentIndex() {
   if (indexBuilt || indexBuilding) return; indexBuilding = true; updateSearchStatus('正在构建全文索引...');
-  await Promise.allSettled(state.posts.map(async p => { try { const res = await fetch(`${window.location.pathname.includes('github.io') ? '' : './'}posts/${p.slug}.md`, { cache: 'no-cache' }); if (!res.ok) return; let md = await res.text(); md = md.slice(0, 50000); contentIndex[p.slug] = stripMd(md).toLowerCase(); } catch (e) { } }));
+  await Promise.allSettled(state.posts.map(async p => { try { const res = await fetch(`./posts/${p.slug}.md`, { cache: 'no-cache' }); if (!res.ok) return; let md = await res.text(); md = md.slice(0, 50000); contentIndex[p.slug] = stripMd(md).toLowerCase(); } catch (e) { } }));
   indexBuilt = true; indexBuilding = false; updateSearchStatus('');
 }
 
@@ -101,8 +101,6 @@ function renderTimeline(list) {
 
 function renderAll() { const { items, total, pages } = paginate(state.filtered); renderTimeline(items); renderPagination(pages) }
 
-// ... existing code ...
-
 function debounce(fn, delay) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn.apply(null, args), delay); } }
 async function loadTimeline() {
   const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -110,7 +108,7 @@ async function loadTimeline() {
   initPaletteUI();
   const timeline = document.getElementById('timeline'); if (!timeline) return;
   try {
-    const res = await fetch(`${window.location.pathname.includes('github.io') ? '' : './'}posts/index.json`, { cache: 'no-cache' }); if (!res.ok) throw new Error('无法加载文章列表');
+    const res = await fetch(`./posts/index.json`, { cache: 'no-cache' }); if (!res.ok) throw new Error('无法加载文章列表');
     const posts = await res.json(); posts.sort((a, b) => new Date(b.date) - new Date(a.date)); state.posts = posts; state.filtered = posts;
     renderTagChips(buildAllTags(posts));
     const input = document.getElementById('search'); if (input) { input.addEventListener('input', debounce((e) => { state.search = e.target.value || ''; applyFilters(); }, 120)); }

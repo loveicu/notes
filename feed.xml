@@ -2,27 +2,27 @@
 <rss version="2.0">
   <channel>
     <title>记录</title>
-    <link>https://loveicu.github.io/notes/</link>
+    <link>./</link>
     <description>时间轴记录</description>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate>
     <item>
       <title>第一篇：开始记录</title>
-      <link>https://loveicu.github.io/post.html?post=start</link>
+      <link>./post.html?post=start</link>
       <guid>start</guid>
       <pubDate>Sat, 23 Aug 2025 00:00:00 +0000</pubDate>
       <description>新的开始，记录生活。</description>
     </item>
     <item>
       <title>周末小记</title>
-      <link>https://loveicu.github.io/post.html?post=weekend-notes</link>
+      <link>./post.html?post=weekend-notes</link>
       <guid>weekend-notes</guid>
       <pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate>
       <description>这个周末做了什么。</description>
     </item>
     <item>
       <title>测试</title>
-      <link>https://loveicu.github.io/post.html?post=note1</link>
+      <link>./post.html?post=note1</link>
       <guid>note1</guid>
       <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
       <description>测试内容</description>
