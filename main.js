@@ -52,7 +52,27 @@ function stripMd(s) {
 }
 async function ensureContentIndex() {
   if (indexBuilt || indexBuilding) return; indexBuilding = true; updateSearchStatus('正在构建全文索引...');
-  await Promise.allSettled(state.posts.map(async p => { try { const res = await fetch(`./posts/${p.slug}.md`, { cache: 'no-cache' }); if (!res.ok) return; let md = await res.text(); md = md.slice(0, 50000); contentIndex[p.slug] = stripMd(md).toLowerCase(); } catch (e) { } }));
+  const missing = new Set();
+  await Promise.allSettled(state.posts.map(async p => {
+    try {
+      const res = await fetch(`./posts/${p.slug}.md`, { cache: 'no-cache' });
+      if (!res.ok) { missing.add(p.slug); return }
+      let md = await res.text(); md = md.slice(0, 50000); contentIndex[p.slug] = stripMd(md).toLowerCase();
+    } catch (e) { missing.add(p.slug) }
+  }));
+  // 如果有缺失，尝试从 bundle.json 填充
+  if (missing.size > 0) {
+    try {
+      const r = await fetch('./posts/bundle.json', { cache: 'no-cache' });
+      if (r.ok) {
+        const bundle = await r.json();
+        missing.forEach(slug => {
+          const md = (bundle && typeof bundle[slug] === 'string') ? bundle[slug] : '';
+          if (md) { contentIndex[slug] = stripMd(md.slice(0, 50000)).toLowerCase(); missing.delete(slug) }
+        });
+      }
+    } catch {}
+  }
   indexBuilt = true; indexBuilding = false; updateSearchStatus('');
 }
 

@@ -4,6 +4,7 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent.parent
 POSTS = BASE/"posts"
 OUT = POSTS/"index.json"
+BUNDLE = POSTS/"bundle.json"
 
 FM_RE = re.compile(r"^---\s*\n([\s\S]*?)\n---\s*\n", re.M)
 KV_RE = re.compile(r"^([A-Za-z0-9_-]+):\s*(.*)$")
@@ -61,11 +62,14 @@ def file_date(path: Path):
 
 def main():
     posts = []
+    bundle = {}
     for p in sorted(POSTS.glob('*.md')):
         if p.name.lower() == 'readme.md':
             continue
         slug = p.stem
         text = p.read_text(encoding='utf-8', errors='ignore')
+        # 收集 bundle 原文
+        bundle[slug] = text
         meta, body = parse_front_matter(text)
         title = meta.get('title') or first_heading(body) or slug
         date = meta.get('date') or file_date(p)
@@ -89,7 +93,9 @@ def main():
                 return datetime.datetime.min
     posts.sort(key=lambda x: to_dt(x['date']), reverse=True)
     OUT.write_text(json.dumps(posts, ensure_ascii=False, indent=2), encoding='utf-8')
+    BUNDLE.write_text(json.dumps(bundle, ensure_ascii=False, indent=0), encoding='utf-8')
     print(f'Wrote {len(posts)} posts to {OUT}')
+    print(f'Wrote bundle with {len(bundle)} entries to {BUNDLE}')
 
 
 if __name__ == '__main__':
